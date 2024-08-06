@@ -20,19 +20,13 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      backgroundColor: AppColors.secondary,
       appBar: AppBar(
-        backgroundColor: AppColors.primary,
         title: Text(selectedIndex==0?
           "ToDo App"
             :
           "Settings"
-          ,style: TextStyle(
-            fontSize: 35,
-            color: Colors.white,
-        fontWeight: FontWeight.bold),
+
       ) ,
-        toolbarHeight: 120,
     ),
       floatingActionButtonLocation:
       FloatingActionButtonLocation.centerDocked,
@@ -48,33 +42,26 @@ class _HomeScreenState extends State<HomeScreen> {
           isScrollControlled: true,
            );
         },
-        child: Icon(Icons.add,color: Colors.white,),
+        child:const Icon(Icons.add,color: Colors.white,),
         shape: RoundedRectangleBorder(
           borderRadius:
           BorderRadius.circular(30),
-            side: BorderSide(color: Colors.white,width: 4)
+            side:const BorderSide(color: Colors.white,width: 4)
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        //color: Colors.white,
-
+        color: Colors.white,
         notchMargin: 12,
         padding: EdgeInsets.zero,
-        shape: CircularNotchedRectangle(),
+        shape: const CircularNotchedRectangle(),
         child: BottomNavigationBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          selectedItemColor: AppColors.primary,
-          unselectedItemColor: AppColors.gray,
-
-
           currentIndex: selectedIndex,
           onTap: (value){
             selectedIndex=value;
             setState(() {});
           },
 
-          items: [
+          items:  [
             BottomNavigationBarItem(
                 icon: Icon(Icons.home),label: "Home"),
             BottomNavigationBarItem(
@@ -89,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     );
   }
-  List<Widget>tabs=[
+  List<Widget>tabs= const[
     TasksTab(),
     SettingsTab()
   ];
