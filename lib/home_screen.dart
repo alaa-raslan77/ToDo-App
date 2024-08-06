@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/app_colors.dart';
 import 'package:todo_app/bottom_sheets/add_task.dart';
@@ -8,7 +7,7 @@ import 'package:todo_app/tabs/tasks_tab.dart';
 class HomeScreen extends StatefulWidget {
   static const String routeName ="home";
 
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -24,7 +23,11 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: AppColors.secondary,
       appBar: AppBar(
         backgroundColor: AppColors.primary,
-        title: Text("ToDo App",style: TextStyle(
+        title: Text(selectedIndex==0?
+          "ToDo App"
+            :
+          "Settings"
+          ,style: TextStyle(
             fontSize: 35,
             color: Colors.white,
         fontWeight: FontWeight.bold),
@@ -64,7 +67,8 @@ class _HomeScreenState extends State<HomeScreen> {
           selectedItemColor: AppColors.primary,
           unselectedItemColor: AppColors.gray,
 
-          currentIndex: 0,
+
+          currentIndex: selectedIndex,
           onTap: (value){
             selectedIndex=value;
             setState(() {});

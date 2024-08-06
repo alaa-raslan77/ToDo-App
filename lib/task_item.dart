@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:todo_app/app_colors.dart';
+import 'package:todo_app/tabs/edit_tab.dart';
 
 class TaskItem extends StatelessWidget {
   const TaskItem({super.key});
@@ -26,14 +27,15 @@ class TaskItem extends StatelessWidget {
               autoClose: false,
               borderRadius: BorderRadius.only(topLeft: Radius.circular(25),bottomLeft: Radius.circular(25)),
               spacing: 10,),
-              SlidableAction(onPressed: (context) {},
-                  label: "Edite",
+              SlidableAction(onPressed: (context) {
+                Navigator.pushNamed(context, EditTab.routeName);
+              },
+                  label: "Edit",
                   backgroundColor: AppColors.primary,
                   borderRadius: BorderRadius.only(topRight: Radius.circular(25),bottomRight: Radius.circular(25)),
                   icon: Icons.edit,
                   autoClose: false,
-
-                  spacing: 10)]),
+                  spacing: 10,)]),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(children: [

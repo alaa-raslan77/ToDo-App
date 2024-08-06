@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/tabs/edit_tab.dart';
 
 import 'home_screen.dart';
 
@@ -13,6 +14,7 @@ class MyApp extends StatelessWidget {
       initialRoute: HomeScreen.routeName,
       routes: {
         HomeScreen.routeName:(context)=>HomeScreen(),
+        EditTab.routeName:(context)=>EditTab(),
 
       },
     );
