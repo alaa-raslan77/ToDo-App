@@ -1,0 +1,22 @@
+{
+  "toDo app": "ToDo App",
+  "settings": "Settings",
+  "task title": "Task Title  ",
+  "task describtion": "Task Describtion",
+  "title": "Title",
+  "describtion": "Describtion",
+  "selection time": "Selection Time",
+  "save changes": "Save Changes",
+  "language": "Language",
+  "arabic": "Arabic",
+  "english": "English",
+  "mode": "Mode",
+  "light": "Light",
+  "dark": "Dark",
+  "add task": "Add Task",
+  "add new task": "Add New Task",
+  "edit task":"Edit Task",
+  "home": "Home",
+  "delete": "Delete",
+  "edit": "Edit"
+}
