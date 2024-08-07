@@ -1,0 +1,23 @@
+{
+  "toDo app": "المهام",
+  "settings": "الاعدادات",
+  "task title": "عنوان المهمة",
+  "task describtion": "وصف المهمة",
+  "title": "عنوان",
+  "describtion": "وصف",
+  "select time": "اختيار الوقت",
+  "save changes": "حفظ التغيرات",
+  "language": "اللغة",
+  "arabic": "عربي",
+  "english": "انجليزي",
+  "mode": "المظهر",
+  "light": "نهاري",
+  "dark": "مظلم",
+  "add task": "اضافة مهمة",
+  "add new task": "اضافة مهمة جديدة",
+  "edit task":" تعديل المهمة",
+  "home": "الرئيسية",
+  "delete": "مسح",
+  "edit": "تعديل"
+
+}

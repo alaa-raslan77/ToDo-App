@@ -1,6 +1,6 @@
 import 'package:calendar_timeline/calendar_timeline.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-
 import '../app_colors.dart';
 import '../task_item.dart';
 
@@ -26,7 +26,8 @@ class TasksTab extends StatelessWidget {
           activeBackgroundDayColor: AppColors.primary,
           //dotsColor: Color(0xFF333A47),
           selectableDayPredicate: (date) => date.day != 23,
-          locale: 'en',
+          locale: context.locale==Locale('en')?
+          'en':'ar',
         ),
         SizedBox(height: 24,),
         Expanded(

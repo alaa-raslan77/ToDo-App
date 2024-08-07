@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'app_colors.dart';
 
 class MyThemeData{
@@ -9,10 +8,11 @@ class MyThemeData{
   static ThemeData lightTheme =ThemeData(
     scaffoldBackgroundColor: AppColors.secondary,
     appBarTheme: AppBarTheme(
+
       backgroundColor: AppColors.primary,
       toolbarHeight: 120,
       iconTheme: IconThemeData(
-        color: AppColors.primary,
+        color: AppColors.secondary,
         size: 30,
       ),
       titleTextStyle: TextStyle(
@@ -28,6 +28,9 @@ class MyThemeData{
       unselectedItemColor: AppColors.gray,
 
 
+    ),
+    bottomAppBarTheme: BottomAppBarTheme(
+      color: Colors.white
     ),
     iconTheme: IconThemeData(
       color: AppColors.primary,
@@ -59,6 +62,12 @@ class MyThemeData{
       brightness: Brightness.light,
       background:AppColors.primary ,
       onBackground:AppColors.primary
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.primary,
+
+      )
     )
   );
 
@@ -69,7 +78,7 @@ class MyThemeData{
         backgroundColor: AppColors.primaryDark,
         toolbarHeight: 120,
         iconTheme: IconThemeData(
-          color: AppColors.primaryDark,
+          color: AppColors.secondaryDark,
           size: 30,
         ),
         titleTextStyle: TextStyle(
@@ -82,6 +91,10 @@ class MyThemeData{
         backgroundColor: Colors.transparent,
         selectedItemColor: AppColors.primaryDark,
         unselectedItemColor: Colors.white,
+
+      ),
+      bottomAppBarTheme: BottomAppBarTheme(
+        color: AppColors.darkColor,
 
       ),
       iconTheme: IconThemeData(
@@ -114,7 +127,14 @@ class MyThemeData{
           brightness: Brightness.light,
           background:AppColors.primaryDark ,
           onBackground:AppColors.primaryDark
-      )
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.primaryDark,
+
+          )
+      ),
+
   );
 
 

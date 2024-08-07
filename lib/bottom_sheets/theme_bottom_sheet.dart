@@ -1,20 +1,27 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
+import 'package:provider/provider.dart';
 import '../app_colors.dart';
+import '../providers/my_provider.dart';
 
 class ThemeBottomSheet extends StatelessWidget {
   const ThemeBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var pro =Provider.of<MyProvider>(context);
+
 
     return Container
       (
       height: MediaQuery.of(context).size.height*.5,
 
       decoration: BoxDecoration(
-          color: Colors.white,
+          color:pro.appTheme==ThemeMode.dark?
+          AppColors.darkColor
+              :
+          Colors.white,
+
           borderRadius: BorderRadius.only(
               topRight: Radius.circular(20),
               topLeft: Radius.circular(20)
@@ -27,25 +34,59 @@ class ThemeBottomSheet extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("light",style: GoogleFonts.inter(color: AppColors.primary,
-                      fontSize: 25,fontWeight: FontWeight.w400)),
-                  Icon(Icons.done),
-                ],
+              child: InkWell(
+                onTap: () {
+                  pro.changeTheme(ThemeMode.light);
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("light".tr(),style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color:pro.appTheme==ThemeMode.dark?
+                    Colors.white
+                            :
+                    AppColors.primaryDark
+
+                    )),
+                    pro.appTheme==ThemeMode.dark?
+                        SizedBox()
+                        :
+                    Icon(Icons.done,color:
+                    pro.appTheme==ThemeMode.dark?
+                    AppColors.primaryDark
+                        :
+                    AppColors.primary),
+                  ],
+                ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: InkWell(
+                onTap: () {
+                        pro.changeTheme(ThemeMode.dark);
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
-                children: [
-                  Text("dark",style: GoogleFonts.inter(color: AppColors.primary,
-                      fontSize: 25,fontWeight: FontWeight.w400)),
-                  Icon(Icons.done)
-                ],
+                  children: [
+                    Text("dark".tr(),style:Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color:pro.appTheme!=ThemeMode.dark?
+                        Colors.black
+                            :
+                        AppColors.primaryDark
+
+                    ) ),
+                    pro.appTheme!=ThemeMode.dark?
+                    SizedBox()
+                        :
+                    Icon(Icons.done,color:
+                    pro.appTheme==ThemeMode.dark?
+                    AppColors.primaryDark
+                        :
+                    AppColors.primary),
+                  ],
+                ),
               ),
             ),
           ],

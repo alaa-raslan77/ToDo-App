@@ -1,5 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/app_colors.dart';
+import '../providers/my_provider.dart';
 
 class AddTask extends StatefulWidget {
   AddTask({super.key});
@@ -14,50 +17,60 @@ class _AddTaskState extends State<AddTask> {
   
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(15),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text("Add New Task",textAlign: TextAlign.center,style: TextStyle(fontSize:25 ,fontWeight:FontWeight.bold),),
-             TextFormField( decoration: InputDecoration(
-               label: Text("Tiltle"),
-               border: OutlineInputBorder(
-                 borderRadius: BorderRadius.circular(18)
-               )
+    var pro =Provider.of<MyProvider>(context);
 
-             ),),
-            SizedBox(height: 20,),
-            TextFormField( decoration: InputDecoration(
-                label: Text("Describtion"),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(18)
-                )
+    return Container(
+      decoration: BoxDecoration(
+        color:  pro.appTheme==ThemeMode.dark?
+        AppColors.darkColor
+            :
+        Colors.white,
+        borderRadius: BorderRadius.only(topRight: Radius.circular(25),topLeft:Radius.circular(25) )
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text("add new task".tr(),textAlign: TextAlign.center,style: Theme.of(context).textTheme.bodyLarge),
+               TextFormField( decoration: InputDecoration(
+                 label: Text("title".tr()),
+                 border: OutlineInputBorder(
+                   borderRadius: BorderRadius.circular(18)
+                 )
 
-            ),),
-            SizedBox(height: 15,),
-
-            Text("Select Time",
-              style: TextStyle(fontSize: 20,
-                  fontWeight: FontWeight.w400),
-              textAlign: TextAlign.left,),
-            SizedBox(height: 15,),
-            InkWell(
-              onTap: () {
-                selectDateFun();
-              },
-              child: Text(selectedDate.toString().substring(0,10),textAlign: TextAlign.center,
-                  style:  TextStyle(fontSize: 15,color: AppColors.primary )),
-            ),
-            SizedBox(height: 15,),
-            ElevatedButton(onPressed: () {},
-              style:ElevatedButton.styleFrom(
-                backgroundColor: AppColors.primary
+               ),),
+              SizedBox(height: 20,),
+              TextFormField( decoration: InputDecoration(
+                  label: Text("describtion".tr()),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(18)
+                  )
+              ),),
+              SizedBox(height: 15,),
+              Text("select time".tr(),
+                style: TextStyle(fontSize: 20,
+                    fontWeight: FontWeight.w400),
+                textAlign:context.locale==Locale('en')?
+                TextAlign.left
+                :
+                TextAlign.right
+                ,),
+              SizedBox(height: 15,),
+              InkWell(
+                onTap: () {
+                  selectDateFun();
+                },
+                child: Text(selectedDate.toString().substring(0,10),textAlign: TextAlign.center,
+                    style:  TextStyle(fontSize: 15,color: AppColors.primary )),
               ),
-              child: Text("Add Task",style: TextStyle(color: Colors.white),),
-            )
-          ],
+              SizedBox(height: 15,),
+              ElevatedButton(onPressed: () {},
+                child: Text("add task".tr(),style: TextStyle(color: Colors.white),),
+              )
+            ],
+        ),
       ),
     ) ;
   }

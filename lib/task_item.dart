@@ -1,6 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/app_colors.dart';
+import 'package:todo_app/providers/my_provider.dart';
 import 'package:todo_app/tabs/edit_tab.dart';
 
 class TaskItem extends StatelessWidget {
@@ -8,12 +11,17 @@ class TaskItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var pro =Provider.of<MyProvider>(context);
+
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 12),
       height: 115,
       width: double.infinity,
        decoration: BoxDecoration(
-           color: Colors.white,
+           color:pro.appTheme==ThemeMode.dark?
+           AppColors.darkColor
+               :
+           Colors.white,
 
          borderRadius: BorderRadius.circular(25)
        ),
@@ -21,7 +29,7 @@ class TaskItem extends StatelessWidget {
         startActionPane: ActionPane(motion: DrawerMotion(),
 
             children: [SlidableAction(onPressed: (context) {},
-              label: "Delete",
+              label: "delete".tr(),
               backgroundColor: Colors.red,
               icon: Icons.delete,
               autoClose: false,
@@ -30,7 +38,7 @@ class TaskItem extends StatelessWidget {
               SlidableAction(onPressed: (context) {
                 Navigator.pushNamed(context, EditTab.routeName);
               },
-                  label: "Edit",
+                  label: "edit".tr(),
                   backgroundColor: AppColors.primary,
                   borderRadius: BorderRadius.only(topRight: Radius.circular(25),bottomRight: Radius.circular(25)),
                   icon: Icons.edit,
@@ -52,8 +60,8 @@ class TaskItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-              Text("Text Title ",style:  TextStyle(fontSize: 15,color: AppColors.primary ),),
-              Text("Task Describtion",style:  TextStyle(fontSize: 15,color: AppColors.gray ),)
+              Text("task title".tr(),style:  TextStyle(fontSize: 15,color: AppColors.primary ),),
+              Text("task describtion".tr(),style:  TextStyle(fontSize: 15,color: AppColors.gray ),)
             ],),
             Spacer(),
             ElevatedButton(onPressed: () {}, style:

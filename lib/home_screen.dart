@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/app_colors.dart';
 import 'package:todo_app/bottom_sheets/add_task.dart';
@@ -22,9 +23,9 @@ class _HomeScreenState extends State<HomeScreen> {
       extendBody: true,
       appBar: AppBar(
         title: Text(selectedIndex==0?
-          "ToDo App"
+          "toDo app".tr()
             :
-          "Settings"
+          "settings".tr()
 
       ) ,
     ),
@@ -38,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding:  EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
                 child: AddTask(),
               ),
-          isDismissible: false,
+          isDismissible: true,
           isScrollControlled: true,
            );
         },
@@ -50,7 +51,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
         notchMargin: 12,
         padding: EdgeInsets.zero,
         shape: const CircularNotchedRectangle(),
@@ -63,9 +63,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
           items:  [
             BottomNavigationBarItem(
-                icon: Icon(Icons.home),label: "Home"),
+                icon: Icon(Icons.home),label: "home".tr()),
             BottomNavigationBarItem(
-                icon: Icon(Icons.settings_outlined),label: "Settings"),
+                icon: Icon(Icons.settings_outlined),label: "settings".tr()),
           ],
         ),
       ),
