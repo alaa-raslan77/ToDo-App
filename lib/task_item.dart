@@ -67,6 +67,7 @@ class TaskItem extends StatelessWidget {
             ElevatedButton(onPressed: () {}, style:
             ElevatedButton.styleFrom(backgroundColor: AppColors.primary)
                 ,child: Icon(Icons.done,color: Colors.white,size: 30,))
+
           ],),
         ),
       ),
