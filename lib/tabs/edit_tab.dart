@@ -112,7 +112,10 @@ class _EditTabState extends State<EditTab> {
                         Container(
                           margin: EdgeInsets.symmetric(horizontal: 50),
                           child: ElevatedButton(onPressed: () {
-
+                            model.title= titleController.text;
+                            model.subTitle= subTitleController.text;
+                            model.date= DateUtils.dateOnly(selectedDate).microsecondsSinceEpoch;
+                            FirebaseFunctions.updateTask(model);
 
                             Navigator.pop(context);
 

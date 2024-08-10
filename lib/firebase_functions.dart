@@ -31,8 +31,8 @@ class FirebaseFunctions{
   static Future<void> deleteTask(String id){
    return getTaskCollection().doc(id).delete();
   }
+
   static Future<void> updateTask(TaskModel taskModel){
     return getTaskCollection().doc(taskModel.id).update(taskModel.toJson());
-
   }
 }
