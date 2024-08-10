@@ -35,7 +35,9 @@ class LanguageBottomSheet extends StatelessWidget {
               padding: const EdgeInsets.all(20.0),
               child: InkWell(
                 onTap: () {
-                  context.setLocale(Locale('ar'));
+                  context.setLocale(Locale('ar')).then((onValue){
+                    Navigator.pop(context);
+                  });
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -70,7 +72,9 @@ class LanguageBottomSheet extends StatelessWidget {
               padding: const EdgeInsets.all(20.0),
               child: InkWell(
                 onTap: () {
-                  context.setLocale(Locale('en'));
+                  context.setLocale(Locale('en')).then((onValue){
+                    Navigator.pop(context);
+                  });
 
                 },
                 child: Row(

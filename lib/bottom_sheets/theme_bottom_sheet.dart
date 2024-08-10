@@ -36,7 +36,9 @@ class ThemeBottomSheet extends StatelessWidget {
               padding: const EdgeInsets.all(20.0),
               child: InkWell(
                 onTap: () {
-                  pro.changeTheme(ThemeMode.light);
+                  pro.changeTheme(ThemeMode.light).then((onValue){
+                    Navigator.pop(context);
+                  });
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -64,7 +66,9 @@ class ThemeBottomSheet extends StatelessWidget {
               padding: const EdgeInsets.all(20.0),
               child: InkWell(
                 onTap: () {
-                        pro.changeTheme(ThemeMode.dark);
+                        pro.changeTheme(ThemeMode.dark).then((onValue){
+                          Navigator.pop(context);
+                        });
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -2,6 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/app_colors.dart';
+import 'package:todo_app/firebase_functions.dart';
+import 'package:todo_app/task_model.dart';
 import '../providers/my_provider.dart';
 
 class AddTask extends StatefulWidget {
@@ -13,6 +15,9 @@ class AddTask extends StatefulWidget {
 
 class _AddTaskState extends State<AddTask> {
   DateTime selectedDate = DateTime.now();
+  var titleController =TextEditingController();
+  var subTitleController =TextEditingController();
+
 
   
   @override
@@ -34,7 +39,9 @@ class _AddTaskState extends State<AddTask> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text("add new task".tr(),textAlign: TextAlign.center,style: Theme.of(context).textTheme.bodyLarge),
-               TextFormField( decoration: InputDecoration(
+               TextFormField(
+                 controller: titleController,
+                 decoration: InputDecoration(
                  label: Text("title".tr()),
                  border: OutlineInputBorder(
                    borderRadius: BorderRadius.circular(18)
@@ -42,7 +49,9 @@ class _AddTaskState extends State<AddTask> {
 
                ),),
               SizedBox(height: 20,),
-              TextFormField( decoration: InputDecoration(
+              TextFormField(
+                controller: subTitleController,
+                decoration: InputDecoration(
                   label: Text("describtion".tr()),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(18)
@@ -66,7 +75,19 @@ class _AddTaskState extends State<AddTask> {
                     style:  TextStyle(fontSize: 15,color: AppColors.primary )),
               ),
               SizedBox(height: 15,),
-              ElevatedButton(onPressed: () {},
+              ElevatedButton(onPressed: () {
+
+                TaskModel task = TaskModel(
+
+                    title: titleController.text,
+                    subTitle: subTitleController.text,
+                    date: DateUtils.dateOnly(selectedDate).microsecondsSinceEpoch);
+                  FirebaseFunctions.addTask(task);
+
+                  Navigator.pop(context);
+
+      
+              },
                 child: Text("add task".tr(),style: TextStyle(color: Colors.white),),
               )
             ],

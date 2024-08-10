@@ -3,10 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../app_colors.dart';
+import '../firebase_functions.dart';
 import '../providers/my_provider.dart';
+import '../task_model.dart';
 
 class EditTab extends StatefulWidget {
+
   static const String routeName ="edit";
+
+
    EditTab({super.key});
 
   @override
@@ -14,16 +19,20 @@ class EditTab extends StatefulWidget {
 }
 
 class _EditTabState extends State<EditTab> {
-
   DateTime selectedDate = DateTime.now();
+  var titleController =TextEditingController();
+  var subTitleController =TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    var model =ModalRoute.of(context)?.settings.arguments as TaskModel;
+
     var pro =Provider.of<MyProvider>(context);
 
     return Stack(
       children: [
         Scaffold(
+
           appBar: AppBar(
             title: Text("toDo app".tr()
             ) ,
@@ -51,58 +60,73 @@ class _EditTabState extends State<EditTab> {
                 ),
                 child:  Padding(
                   padding: const EdgeInsets.only(left: 10,right: 10),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      SizedBox(height: 20,),
-                      Text("edit task".tr(),textAlign: TextAlign.center,
-                        style:Theme.of(context).textTheme.bodyLarge?.copyWith(color:
-                        pro.appTheme==ThemeMode.dark?
-                        Colors.white
-                            :
-                        Colors.black,
-                        fontWeight: FontWeight.bold,)),
-                      SizedBox(height: 20,),
-                      TextFormField( decoration: InputDecoration(
-                          label: Text("title".tr()),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        SizedBox(height: 20,),
+                        Text("edit task".tr(),textAlign: TextAlign.center,
+                          style:Theme.of(context).textTheme.bodyLarge?.copyWith(color:
+                          pro.appTheme==ThemeMode.dark?
+                          Colors.white
+                              :
+                          Colors.black,
+                          fontWeight: FontWeight.bold,)),
+                        SizedBox(height: 20,),
+                        TextFormField(
 
-                      ),),
-                      SizedBox(height: 20,),
-                      TextFormField( decoration: InputDecoration(
-                          label: Text("describtion".tr()),
+                          controller: titleController,
+                          decoration: InputDecoration(
+                            //label: Text(model.title),
+                            hintText: model.title
+
+                        ),),
+                        SizedBox(height: 20,),
+                        TextFormField(
+                          controller: subTitleController,
+                          decoration: InputDecoration(
+                            //label: Text(model.subTitle),
+                            hintText: model.subTitle
 
 
-                      ),),
-                      SizedBox(height: 15,),
+                        ),),
+                        SizedBox(height: 15,),
 
-                      Text("select time".tr(),
-                        style: Theme.of(context).textTheme.bodyMedium,
-                        textAlign:context.locale==Locale('en')?
-                        TextAlign.left
-                            :
-                        TextAlign.right,),
-                      SizedBox(height: 30,),
-                      InkWell(
-                        onTap: () {
-                          selectDateFun();
-                        },
-                        child: Text(selectedDate.toString().substring(0,10),textAlign: TextAlign.center,
-                            style:  TextStyle(fontSize: 15,color: AppColors.primary )),
-                      ),
-                      SizedBox(height: 60,),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 50),
-                        child: ElevatedButton(onPressed: () {},
-                          style:ElevatedButton.styleFrom(
-                            minimumSize: Size.fromRadius(25)
-                          ),
-                          child: Text("save changes".tr(),style: GoogleFonts.inter(
-                            fontSize: 18,fontWeight: FontWeight.w400,color: Colors.white
-                          )),
+                        Text("select time".tr(),
+                          style: Theme.of(context).textTheme.bodyMedium,
+                          textAlign:context.locale==Locale('en')?
+                          TextAlign.left
+                              :
+                          TextAlign.right,),
+                        SizedBox(height: 30,),
+                        InkWell(
+                          onTap: () {
+                            selectDateFun();
+                          },
+                          child: Text(selectedDate.toString().substring(0,10),textAlign: TextAlign.center,
+                              style:  TextStyle(fontSize: 15,color: AppColors.primary )),
                         ),
-                      )
-                    ],
+                        SizedBox(height: 60,),
+                        Container(
+                          margin: EdgeInsets.symmetric(horizontal: 50),
+                          child: ElevatedButton(onPressed: () {
+
+
+                            Navigator.pop(context);
+
+                          },
+                            style:ElevatedButton.styleFrom(
+                              minimumSize: Size.fromRadius(25)
+                            ),
+                            child: Text("save changes".tr(),style: GoogleFonts.inter(
+                              fontSize: 18,fontWeight: FontWeight.w400,color: Colors.white
+                            )),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
