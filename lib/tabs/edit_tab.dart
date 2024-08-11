@@ -19,15 +19,18 @@ class EditTab extends StatefulWidget {
 }
 
 class _EditTabState extends State<EditTab> {
-  DateTime selectedDate = DateTime.now();
   var titleController =TextEditingController();
   var subTitleController =TextEditingController();
 
+
+
   @override
   Widget build(BuildContext context) {
+    var pro =Provider.of<MyProvider>(context);
     var model =ModalRoute.of(context)?.settings.arguments as TaskModel;
 
-    var pro =Provider.of<MyProvider>(context);
+    // titleController = TextEditingController( text: model.title);
+    // subTitleController = TextEditingController( text: model.subTitle);
 
     return Stack(
       children: [
@@ -77,24 +80,33 @@ class _EditTabState extends State<EditTab> {
                         SizedBox(height: 20,),
                         TextFormField(
 
-                          controller: titleController,
+                          initialValue: model.title,
+                         onChanged: (newText){
+                            model.title=newText;
+                         },
+                         //controller: titleController,
                           decoration: InputDecoration(
-                            //label: Text(model.title),
-                            hintText: model.title
+                           label: Text("new title"),
+
+
 
                         ),),
                         SizedBox(height: 20,),
                         TextFormField(
-                          controller: subTitleController,
+                         initialValue: model.subTitle,
+                          onChanged: (newText){
+                            model.subTitle=newText;
+                          },
+                         // controller: subTitleController,
                           decoration: InputDecoration(
-                            //label: Text(model.subTitle),
-                            hintText: model.subTitle
+                            label: Text("new subTitle"),
+
 
 
                         ),),
                         SizedBox(height: 15,),
 
-                        Text("select time".tr(),
+                        Text("Select New Time",
                           style: Theme.of(context).textTheme.bodyMedium,
                           textAlign:context.locale==Locale('en')?
                           TextAlign.left
@@ -103,20 +115,23 @@ class _EditTabState extends State<EditTab> {
                         SizedBox(height: 30,),
                         InkWell(
                           onTap: () {
-                            selectDateFun();
+                            selectDateFun(model);
                           },
-                          child: Text(selectedDate.toString().substring(0,10),textAlign: TextAlign.center,
+                          child: Text(
+                          DateTime.fromMicrosecondsSinceEpoch(model.date).toString().substring(0,10)
+                              ,textAlign: TextAlign.center,
                               style:  TextStyle(fontSize: 15,color: AppColors.primary )),
                         ),
                         SizedBox(height: 60,),
                         Container(
                           margin: EdgeInsets.symmetric(horizontal: 50),
                           child: ElevatedButton(onPressed: () {
-                            model.title= titleController.text;
-                            model.subTitle= subTitleController.text;
-                            model.date= DateUtils.dateOnly(selectedDate).microsecondsSinceEpoch;
-                            FirebaseFunctions.updateTask(model);
+                            DateTime dateTime = DateTime.fromMicrosecondsSinceEpoch(model.date);
+                               model.title=model.title;
+                               model.subTitle=model.subTitle;
+                               model.date= DateUtils.dateOnly(dateTime).microsecondsSinceEpoch;
 
+                            FirebaseFunctions.updateTask(model);
                             Navigator.pop(context);
 
                           },
@@ -140,8 +155,8 @@ class _EditTabState extends State<EditTab> {
     );
   }
 
-  selectDateFun()async{
-    DateTime? chosenDate = await showDatePicker(
+  selectDateFun(TaskModel taskmodel)async{
+    DateTime? chodenDate = await showDatePicker(
         context: context,
         builder: (context, child) => Theme(
           data: Theme.of(context).copyWith(colorScheme: ColorScheme.light(
@@ -149,11 +164,11 @@ class _EditTabState extends State<EditTab> {
           )),
           child:child! ,
         ),
-        initialDate: selectedDate,
+        initialDate: DateTime.fromMicrosecondsSinceEpoch(taskmodel.date),
         firstDate: DateTime.now(),
         lastDate: DateTime.now().add(Duration(days: 365)));
-    if(chosenDate!=null){
-      selectedDate=chosenDate;
+    if(chodenDate!=null){
+      taskmodel.date=chodenDate.microsecondsSinceEpoch;
       setState(() {});
 
     }

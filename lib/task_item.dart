@@ -41,9 +41,10 @@ class TaskItem extends StatelessWidget {
               borderRadius: BorderRadius.only(topLeft: Radius.circular(25),bottomLeft: Radius.circular(25)),
               spacing: 10,),
               SlidableAction(onPressed: (context) {
-                Navigator.pushNamed(context, EditTab.routeName,
-                    arguments:TaskModel(title:taskModel.title , subTitle: taskModel.subTitle, date: taskModel.date,
-                   ));
+               Navigator.pushNamed(context, EditTab.routeName,
+                   arguments:TaskModel(title:taskModel.title , subTitle: taskModel.subTitle, date: taskModel.date,
+                     id: taskModel.id
+                  ));
               },
                   label: "edit".tr(),
                   backgroundColor: AppColors.primary,
