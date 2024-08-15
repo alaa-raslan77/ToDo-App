@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
@@ -42,8 +43,12 @@ class TaskItem extends StatelessWidget {
               spacing: 10,),
               SlidableAction(onPressed: (context) {
                Navigator.pushNamed(context, EditTab.routeName,
-                   arguments:TaskModel(title:taskModel.title , subTitle: taskModel.subTitle, date: taskModel.date,
-                     id: taskModel.id
+                   arguments:TaskModel(
+                       title:taskModel.title ,
+                       subTitle: taskModel.subTitle,
+                       date: taskModel.date,
+                     id: taskModel.id,
+                     userId: FirebaseAuth.instance.currentUser!.uid
                   ));
               },
                   label: "edit".tr(),

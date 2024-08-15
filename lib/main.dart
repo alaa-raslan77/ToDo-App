@@ -13,7 +13,7 @@ void main()async{
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await EasyLocalization.ensureInitialized();
-  await FirebaseFirestore.instance.disableNetwork();
+  await FirebaseFirestore.instance.enableNetwork();
 
   runApp(ChangeNotifierProvider(
       create: (context)=>MyProvider(),
