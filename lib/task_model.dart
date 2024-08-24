@@ -20,7 +20,7 @@ class TaskModel {
       date:json['date'],
       id: json['id'],
       isDone: json['isDone'],
-    userId: json['id']
+    userId: json['userId']
   );
 
 

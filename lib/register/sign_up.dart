@@ -132,10 +132,15 @@ class _SignUpState extends State<SignUp> {
                       if(formKey.currentState!.validate()){
                         FirebaseFunctions.creatAccount(
                             emailController.text, passwordController.text,
-                            onSuccess: (){
-                              Navigator.pushNamedAndRemoveUntil(
-                                context, HomeScreen.routeName , (route) => false,);
-                            },
+
+
+                              onSuccess: ()async{
+                                pro.initUser();
+                                await Future.delayed(Duration(microseconds:500 ));
+                                Navigator.pushNamedAndRemoveUntil(
+                                  context, HomeScreen.routeName, (route) => false,);
+                              },
+
                             onError: (message){
                               showDialog(context: context, builder:
                                   (context) => AlertDialog(

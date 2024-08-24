@@ -44,6 +44,7 @@ class _TasksTabState extends State<TasksTab> {
             stream: FirebaseFunctions.getTasks(date),
             builder: (context, snapshot) {
 
+
               if (snapshot.connectionState==ConnectionState.waiting){
                 return CircularProgressIndicator();
               }
@@ -64,10 +65,14 @@ class _TasksTabState extends State<TasksTab> {
               if (tasks.isEmpty){
                 return Center(child: Text("No Tasks"));
               }
-              return    Expanded(
+              return Expanded(
                 child: ListView.separated(itemBuilder:
                     (context, index) {
+
                   return TaskItem(taskModel: tasks[index],);
+
+
+
 
                 },separatorBuilder: (context, index) => SizedBox(height: 12,),
                   itemCount: tasks.length,

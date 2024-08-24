@@ -43,12 +43,8 @@ class TaskItem extends StatelessWidget {
               spacing: 10,),
               SlidableAction(onPressed: (context) {
                Navigator.pushNamed(context, EditTab.routeName,
-                   arguments:TaskModel(
-                       title:taskModel.title ,
-                       subTitle: taskModel.subTitle,
-                       date: taskModel.date,
-                     id: taskModel.id,
-                     userId: FirebaseAuth.instance.currentUser!.uid
+                   arguments:TaskModel(title:taskModel.title , subTitle: taskModel.subTitle, date: taskModel.date,
+                     id: taskModel.id,userId:  FirebaseAuth.instance.currentUser!.uid
                   ));
               },
                   label: "edit".tr(),
@@ -84,6 +80,7 @@ class TaskItem extends StatelessWidget {
             Spacer(),
             taskModel.isDone?
             Text("Done!!",style: TextStyle(color: Colors.green,fontSize: 22,fontWeight: FontWeight.w700),)
+
                 :
             ElevatedButton(onPressed: () {
               taskModel.isDone=true;
