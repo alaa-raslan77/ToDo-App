@@ -8,8 +8,10 @@ class TextInputForm extends StatelessWidget {
   String hint;
   TextInputType keyType;
   bool isObscure;
+  String? Function(String?)? validate;
 
-  TextInputForm({super.key,required this.controller,required this.hint, required this.keyType, required this.isObscure});
+  TextInputForm({super.key,required this.controller,
+    required this.hint, required this.keyType, required this.isObscure,required this.validate });
 
 
   @override
@@ -19,6 +21,8 @@ class TextInputForm extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),
       child: TextFormField(
+        validator:validate
+        ,
         obscureText: isObscure,
         keyboardType: keyType,
         controller: controller,

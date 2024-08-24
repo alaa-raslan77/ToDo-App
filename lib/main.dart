@@ -20,7 +20,8 @@ void main()async{
       child: EasyLocalization(
           supportedLocales: [Locale('en'), Locale('ar')],
           path: 'assets/translations',
-          startLocale: Locale('ar'),
+          startLocale: Locale('en'),
+          saveLocale: true,
           child: MyApp())));
 
 }

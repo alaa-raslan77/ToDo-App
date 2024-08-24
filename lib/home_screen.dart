@@ -1,7 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/app_colors.dart';
 import 'package:todo_app/bottom_sheets/add_task.dart';
+import 'package:todo_app/providers/my_provider.dart';
+import 'package:todo_app/register/log_in.dart';
 import 'package:todo_app/tabs/settings_tab.dart';
 import 'package:todo_app/tabs/tasks_tab.dart';
 
@@ -19,20 +23,29 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var pro =Provider.of<MyProvider>(context);
+
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
         title: Text(selectedIndex==0?
-          "toDo app".tr()
+          "ToDo App ${pro.userModel?.userName}"
             :
           "settings".tr()
 
       ) ,
+        actions: [
+          IconButton(onPressed: () {
+            FirebaseAuth.instance.signOut();
+            Navigator.pushNamedAndRemoveUntil(
+              context, LogIn.routeName , (route) => false,);}, icon: Icon(Icons.logout))
+        ],
     ),
       floatingActionButtonLocation:
       FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.primary,
+        backgroundColor:pro.appTheme==ThemeMode.dark?
+        AppColors.primaryDark:AppColors.primary,
         onPressed: () {
           showModalBottomSheet(context: context, builder: (context) =>
               Padding(

@@ -35,8 +35,7 @@ class _TasksTabState extends State<TasksTab> {
           dotColor: Colors.white,
           activeDayColor: Colors.white,
           activeBackgroundDayColor: AppColors.primary,
-          //dotsColor: Color(0xFF333A47),
-          selectableDayPredicate: (date) => date.day != 23,
+          //selectableDayPredicate: (date) => date.day != 23,
           locale: context.locale==Locale('en')?
           'en':'ar',
         ),

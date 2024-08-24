@@ -80,8 +80,6 @@ class _AddTaskState extends State<AddTask> {
 
                 TaskModel task = TaskModel(
                   userId:FirebaseAuth.instance.currentUser!.uid ,
-
-
                     title: titleController.text,
                     subTitle: subTitleController.text,
                     date: DateUtils.dateOnly(selectedDate).microsecondsSinceEpoch);

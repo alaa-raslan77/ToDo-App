@@ -69,6 +69,7 @@ class FirebaseFunctions{
       credential.user?.sendEmailVerification();
       UserModel userModel=UserModel(
         id:credential.user!.uid ,
+
           userName: userName, phone: phone, age: age, email: email);
       addUser(userModel);
       onSuccess();
@@ -88,11 +89,18 @@ class FirebaseFunctions{
           email: email,
           password: password
       );
-      if(credential.user?.emailVerified==true){
         onSuccess();
-      }
+
     } on FirebaseAuthException catch (e) {
       onError(e.toString());
     }
+  }
+
+
+  static Future< UserModel?> readUserData()async{
+    var collection = getUsersCollection();
+    DocumentSnapshot<UserModel> docUser= await
+    collection.doc(FirebaseAuth.instance.currentUser!.uid).get();
+    return docUser.data();
   }
 }

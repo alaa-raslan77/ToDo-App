@@ -1,7 +1,27 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo_app/firebase_functions.dart';
+import 'package:todo_app/user_model.dart';
 
 class MyProvider extends ChangeNotifier{
+
+  UserModel? userModel;
+  User? firebaseUser;
+
+  MyProvider(){
+  firebaseUser=FirebaseAuth.instance.currentUser;
+  if(firebaseUser!= null){
+    initUser();
+  }
+
+  }
+
+  initUser()async{
+  userModel=await FirebaseFunctions.readUserData();
+  notifyListeners();
+
+  }
   ThemeMode appTheme = ThemeMode.light;
   Future<void> getTheme ()async{
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -12,16 +32,10 @@ class MyProvider extends ChangeNotifier{
       }
       else {
         appTheme = ThemeMode.light;
-
       }
       notifyListeners();
-
     }
   }
-
-
-
-
 
   Future<void> changeTheme(ThemeMode themeMode)async{
     appTheme=themeMode;
@@ -31,4 +45,14 @@ class MyProvider extends ChangeNotifier{
     notifyListeners();
 
   }
+
+
+
   }
+
+
+
+
+
+
+
